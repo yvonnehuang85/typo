@@ -1,15 +1,16 @@
-Feature: Create Blog
-  As an author
-  In order to gift my thoughts to the world
-  I want to create a blog
+Feature: Write Articles
+  As a blog administrator
+  In order to share my thoughts with the world
+  I want to be able to add categories to my blog
 
-  Scenario: Create blog page shown
-    Given I am on the home page
-    Then I should see "Welcome"
-    And I should see "My Shiny Weblog!"
-
-  Scenario: Create blog page not shown when blog created
+  Background:
     Given the blog is set up
-    When I am on the home page
-    Then I should not see "My Shiny Weblog!"
-    And I should see "Teh Blag"
+    And I am logged into the admin panel
+
+  Scenario: Successfully write articles
+    Given I am on the new categories page
+    When I fill in "category_name" with "test"
+    And I fill in "category_keywords" with "test"
+    And I fill in "category_permalink" with ""
+    Then I press "Save"
+    Then I should see "Category was successfully saved."
